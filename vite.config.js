@@ -16,5 +16,8 @@ export default defineConfig({
         createPost: resolve(__dirname, "./post/create/index.html"),
       },
     },
+    esbuild: {
+      target: "esnext", // Target the latest JS features, including top-level await
+    },
   },
 });
