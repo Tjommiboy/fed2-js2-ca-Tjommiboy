@@ -3,6 +3,7 @@ import { API_AUTH_REGISTER } from "../constants";
 
 export async function registerUser(formData) {
   try {
+    console.log("Sending data:", formData);
     const response = await fetch(API_AUTH_REGISTER, {
       method: "POST",
       headers: {

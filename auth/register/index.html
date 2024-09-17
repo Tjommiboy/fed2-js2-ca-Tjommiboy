@@ -5,14 +5,14 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
-    <script type="module" src="../../src/app.js"></script>
-    <link rel="stylesheet" href="/style.css" />
+    <!-- <script type="module" src="../../src/app.js"></script> -->
+    <link rel="stylesheet" href="/src/css/style.css" />
   </head>
 
   <body>
     <h1>Register</h1>
 
-    <form name="register">
+    <form id="registerForm">
       <div>
         <label for="name">Name</label>
         <input
@@ -24,6 +24,7 @@
           pattern="^[\w]+$"
           title="Please enter a username using only letters and numbers"
           autocomplete="name"
+          value="samsung2"
         />
       </div>
 
@@ -37,6 +38,7 @@
           pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
           title="Please enter a valid noroff.no or stud.noroff.no address"
           autocomplete="email"
+          value="samsung2@stud.noroff.no"
         />
       </div>
 
@@ -49,13 +51,13 @@
           required
           minlength="8"
           autocomplete="new-password"
+          value="samsung2"
         />
       </div>
 
       <a href="/auth/login/">Login</a>
-      <button type="submit" id="registerButton" form="register">
-        Register
-      </button>
+      <button type="submit" id="registerButton">Register</button>
     </form>
+    <script type="module" src="../../src/app.js"></script>
   </body>
 </html>

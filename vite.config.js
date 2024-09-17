@@ -4,6 +4,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   appType: "mpa",
   build: {
+    target: "esnext",
     rollupOptions: {
       input: {
         main: resolve(__dirname, "./index.html"),
@@ -15,9 +16,6 @@ export default defineConfig({
         editPost: resolve(__dirname, "./post/edit/index.html"),
         createPost: resolve(__dirname, "./post/create/index.html"),
       },
-    },
-    esbuild: {
-      target: "esnext", // Target the latest JS features, including top-level await
     },
   },
 });
