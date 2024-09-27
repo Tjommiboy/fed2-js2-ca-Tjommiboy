@@ -3,6 +3,13 @@ import { authGuard } from "../../utilities/authGuard";
 
 authGuard();
 
-const form = document.forms.createPost;
-
-form.addEventListener("submit", onCreatePost);
+const form = document.querySelector("#createPostForm");
+if (form) {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    console.log("Form submit event detected");
+    onCreatePost(event);
+  });
+} else {
+  console.error("Form not found");
+}

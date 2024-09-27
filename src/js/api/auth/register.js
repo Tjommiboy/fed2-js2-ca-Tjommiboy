@@ -1,14 +1,12 @@
-import { API_BASE } from "../constants";
 import { API_AUTH_REGISTER } from "../constants";
+import { authFetch } from "../fetch";
 
 export async function registerUser(formData) {
   try {
     console.log("Sending data:", formData);
-    const response = await fetch(API_AUTH_REGISTER, {
+    const response = await authFetch(API_AUTH_REGISTER, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+
       body: JSON.stringify(formData),
     });
 
@@ -17,6 +15,7 @@ export async function registerUser(formData) {
     }
 
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

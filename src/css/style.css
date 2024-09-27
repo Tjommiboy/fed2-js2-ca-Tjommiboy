@@ -1,1 +1,136 @@
 @import url(_reset.css);
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #2d381bac;
+}
+
+header {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.notification {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  column-count: 3;
+}
+
+.post {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.post img {
+  max-width: 100%; /* Ensures images are responsive */
+  height: auto;
+  border-radius: 5px; /* Optional for rounded corners */
+}
+
+.post {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #f9f9f9; /* Light background for posts */
+}
+
+#profileContainer {
+  margin-bottom: 20px; /* Adds space between profile and posts */
+}
+
+#postsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+  padding: 1em;
+  justify-content: space-between;
+}
+
+.post {
+  border: 1px solid #ccc;
+  padding: 1em;
+  width: calc(100% - 10px);
+  box-sizing: border-box;
+}
+
+.post img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.homePostImg {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.outerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.specificPostContainer {
+  width: calc(50% - 10px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+}
+
+.specificImg {
+  width: 80%;
+  height: 50%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.edit-button {
+  background-color: #28a0b8; /* Use a color that matches your design */
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  margin: 0.5em;
+
+  cursor: pointer;
+  border-radius: 5px; /* Optional: rounded corners */
+}
+
+.edit-button:hover {
+  background-color: #79c8f5; /* Darker shade on hover */
+}
