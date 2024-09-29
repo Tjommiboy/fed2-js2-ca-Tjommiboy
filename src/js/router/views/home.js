@@ -6,6 +6,7 @@ import { load } from "../../utilities/storage";
 async function displayPosts() {
   const response = await readPosts();
   const posts = response.data;
+
   const currentUser = load("profile");
   const postsContainer = document.getElementById("postsContainer");
 
@@ -20,6 +21,7 @@ async function displayPosts() {
     postElement.className = "post";
     postElement.innerHTML = `
             <h3>${post.title}</h3>
+          
             <p>${post.body}</p> 
             ${
               post.media

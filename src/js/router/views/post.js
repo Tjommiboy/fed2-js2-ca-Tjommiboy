@@ -3,7 +3,7 @@ import { headers } from "../../api/headers";
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get("postId");
-console.log(`Navigating to post with ID: ${postId}`);
+
 if (postId) {
   fetchSinglePost(postId);
 } else {
@@ -22,7 +22,6 @@ async function fetchSinglePost(postId) {
     }
 
     const post = await response.json();
-    console.log(post);
 
     displaySinglePost(post);
   } catch (error) {
@@ -33,7 +32,6 @@ async function fetchSinglePost(postId) {
 function displaySinglePost(post) {
   const postContainer = document.getElementById("postContainer");
 
-  // Check if tags exist and are an array, otherwise set a fallback
   const tags = Array.isArray(post.tags) ? post.tags.join(", ") : "No tags";
 
   postContainer.innerHTML = `
@@ -48,7 +46,7 @@ function displaySinglePost(post) {
             : ""
         }
         `;
-  // Create the edit button
+
   const editButton = document.createElement("button");
   editButton.textContent = "Edit";
   editButton.onclick = (event) => {
@@ -56,6 +54,5 @@ function displaySinglePost(post) {
     window.location.href = `/post/edit/?postId=${postId}`;
   };
 
-  // Append the edit button to the post link
   postContainer.appendChild(editButton);
 }
