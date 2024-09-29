@@ -12,6 +12,10 @@ async function displayPosts() {
   postsContainer.innerHTML = "";
 
   posts.forEach((post) => {
+    const postLink = document.createElement("a");
+    postLink.href = `/post/?postId=${post.id}`;
+    postLink.className = "post-link";
+
     const postElement = document.createElement("div");
     postElement.className = "post";
     postElement.innerHTML = `
@@ -26,12 +30,14 @@ async function displayPosts() {
             <p>Tags: ${post.tags.join(", ")}</p> 
             <p>Created on: ${new Date(post.created).toLocaleDateString()}</p> 
         `;
-    postsContainer.appendChild(postElement);
+
+    postLink.appendChild(postElement);
+
+    postsContainer.appendChild(postLink);
   });
 }
 displayPosts();
 
-// Call displayPosts on page load or a specific event
 document.addEventListener("DOMContentLoaded", displayPosts);
 const logout = () => {
   storage.remove("token");

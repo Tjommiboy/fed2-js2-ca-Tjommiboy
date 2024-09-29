@@ -77,6 +77,7 @@ header {
   padding: 1em;
   width: calc(100% - 10px);
   box-sizing: border-box;
+  height: min(536px);
 }
 
 .post img {
@@ -132,5 +133,19 @@ header {
 }
 
 .edit-button:hover {
+  background-color: #79c8f5; /* Darker shade on hover */
+}
+.delete-button {
+  background-color: #28a0b8; /* Use a color that matches your design */
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  margin: 0.5em;
+
+  cursor: pointer;
+  border-radius: 5px; /* Optional: rounded corners */
+}
+
+.delete-button:hover {
   background-color: #79c8f5; /* Darker shade on hover */
 }

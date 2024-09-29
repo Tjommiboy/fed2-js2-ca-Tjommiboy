@@ -20,7 +20,7 @@ export async function createPost({ title, body, tags, media }) {
       throw new Error("Failed to create post");
     }
     const data = await response.json();
-    console.log("Post created successfully:", data);
+
     window.location.href = "/";
   } catch (error) {
     console.error("Error creating post:", error);

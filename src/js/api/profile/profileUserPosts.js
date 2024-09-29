@@ -1,7 +1,7 @@
 import { API_SOCIAL_PROFILES } from "../constants";
 import { headers } from "../headers";
+import { deletePost } from "../post/delete";
 
-// Function to fetch user posts based on profile data
 export async function loadAndDisplayUserPosts() {
   try {
     const profileData = localStorage.getItem("profile");
@@ -11,10 +11,9 @@ export async function loadAndDisplayUserPosts() {
       return;
     }
 
-    const profile = JSON.parse(profileData); // Parse the profile data
+    const profile = JSON.parse(profileData);
     const username = profile.name;
 
-    // Fetch posts and display them in one step
     const posts = await fetchUserPosts(username);
     if (posts) displayPosts(posts);
   } catch (error) {
@@ -22,7 +21,6 @@ export async function loadAndDisplayUserPosts() {
   }
 }
 
-// Fetch posts function
 async function fetchUserPosts(username) {
   try {
     const response = await fetch(`${API_SOCIAL_PROFILES}/${username}/posts`, {
@@ -50,34 +48,42 @@ function displayPosts(posts) {
     postLink.classList.add("post-link");
     postLink.href = `/post/?postId=${id}`;
     postLink.setAttribute("data-id", id);
+
     const editButtonHTML = `
-    <button class="edit-button" onclick="event.preventDefault(); window.location.href='/post/edit/?postId=${id}';">Edit</button>
-  `;
+        <button class="edit-button">Edit</button>
+      `;
+
+    const deleteButtonHTML = `
+        <button class="delete-button">Delete</button>
+      `;
+
     postLink.innerHTML = `
         <div class="post">
           <h3>${title}</h3>
           <p>${body}</p>
           <p>Tags: ${tags.join(", ")}</p>
-          ${editButtonHTML}
+     
           ${
             media?.url
               ? `<img src="${media.url}" alt="${media.alt || "Post media"}">`
               : ""
           }
-<p>${created}</>
+          <p>${created}</p>
+          ${editButtonHTML}
+          ${deleteButtonHTML}
         </div>
       `;
-    // // Create the edit button
-    // const editButton = document.createElement("button");
-    // editButton.textContent = "Edit";
-    // editButton.onclick = (event) => {
-    //   event.preventDefault();
-    //   window.location.href = `/post/edit/?postId=${id}`; // Redirect to the edit page
-    // };
-
-    // // Append the edit button to the post link
-    // postLink.appendChild(editButton);
 
     postsContainer.appendChild(postLink);
+
+    postLink.querySelector(".edit-button").onclick = (event) => {
+      event.preventDefault();
+      window.location.href = `/post/edit/?postId=${id}`;
+    };
+
+    postLink.querySelector(".delete-button").onclick = (event) => {
+      event.preventDefault();
+      deletePost(id);
+    };
   });
 }

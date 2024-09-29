@@ -5,7 +5,6 @@ export async function readProfile(username) {
 
   if (profileData) {
     const profile = JSON.parse(profileData);
-    // console.log("Profile found:", profile);
 
     const profileContainer = document.getElementById("profileContainer");
 
