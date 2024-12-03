@@ -6,12 +6,11 @@ export async function onLogin(event) {
     email: document.getElementById("email").value,
     password: document.getElementById("password").value,
   };
-  loginUser(formData)
-    .then((response) => {
-      console.log("Login successful", response);
-      window.location.href = "/";
-    })
-    .catch((error) => {
-      console.error("Login failed", error);
-    });
+  try {
+    const response = await loginUser(formData);
+    console.log("Login successful", response);
+    window.location.href = "/";
+  } catch (error) {
+    console.error("Login failed", error);
+  }
 }
