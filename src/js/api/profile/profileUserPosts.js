@@ -1,6 +1,7 @@
 import { API_SOCIAL_PROFILES } from "../constants";
 import { headers } from "../headers";
 import { deletePost } from "../post/delete";
+import { showSpinner, hideSpinner } from "../../ui/global/spinner";
 
 export async function loadAndDisplayUserPosts() {
   try {
@@ -22,6 +23,7 @@ export async function loadAndDisplayUserPosts() {
 }
 
 async function fetchUserPosts(username) {
+  showSpinner();
   try {
     const response = await fetch(`${API_SOCIAL_PROFILES}/${username}/posts`, {
       method: "GET",
@@ -36,6 +38,8 @@ async function fetchUserPosts(username) {
     return data;
   } catch (error) {
     console.error("Error fetching posts:", error);
+  } finally {
+    hideSpinner();
   }
 }
 

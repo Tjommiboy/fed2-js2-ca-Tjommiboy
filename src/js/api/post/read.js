@@ -1,9 +1,27 @@
 import { API_SOCIAL_POSTS } from "../constants";
 import { load } from "../../utilities/storage";
-
+import { headers } from "../../api/headers";
+import { displaySinglePost } from "../../router/views/post";
 import { authFetch } from "../fetch";
 
-export async function readPost(id) {}
+export async function readPost(postId) {
+  try {
+    const response = await fetch(`${API_SOCIAL_POSTS}/${postId}`, {
+      method: "GET",
+      headers: headers(),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch post details");
+    }
+
+    const post = await response.json();
+
+    displaySinglePost(post);
+  } catch (error) {
+    console.error("Error fetching post details:", error);
+  }
+}
 
 export async function readPosts(limit = 100, page = 1, tag) {
   try {

@@ -1,58 +1,57 @@
 import { API_SOCIAL_POSTS } from "../../api/constants";
-import { headers } from "../../api/headers";
+
+import { readPost } from "../../api/post/read";
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get("postId");
 
 if (postId) {
-  fetchSinglePost(postId);
+  readPost(postId);
 } else {
   console.error("No post ID found in URL");
 }
 
-async function fetchSinglePost(postId) {
-  try {
-    const response = await fetch(`${API_SOCIAL_POSTS}/${postId}`, {
-      method: "GET",
-      headers: headers(),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch post details");
-    }
-
-    const post = await response.json();
-
-    displaySinglePost(post);
-  } catch (error) {
-    console.error("Error fetching post details:", error);
-  }
-}
-
-function displaySinglePost(post) {
+export function displaySinglePost(post) {
   const postContainer = document.getElementById("postContainer");
+  postContainer.innerHTML = ""; // Clear any existing content
 
+  // Create title element
+  const titleElement = document.createElement("h2");
+  titleElement.textContent = post.data.title;
+
+  // Create body element
+  const bodyElement = document.createElement("p");
+  bodyElement.textContent = post.data.body;
+
+  // Create tags element
+  const tagsElement = document.createElement("p");
   const tags = Array.isArray(post.tags) ? post.tags.join(", ") : "No tags";
+  tagsElement.textContent = `Tags: ${tags}`;
 
-  postContainer.innerHTML = `
-        <h2>${post.data.title}</h2>
-        <p>${post.data.body}</p>
-        <p>Tags: ${tags}</p>
-        ${
-          post.data.media?.url
-            ? `<img class="specificImg" src="${post.data.media.url}" alt="${
-                post.data.media.alt || "Post media"
-              }">`
-            : ""
-        }
-        `;
+  // Create media element if it exists
+  let mediaElement;
+  if (post.data.media?.url) {
+    mediaElement = document.createElement("img");
+    mediaElement.className = "specificImg";
+    mediaElement.src = post.data.media.url;
+    mediaElement.alt = post.data.media.alt || "Post media";
+  }
 
+  // Create edit button
   const editButton = document.createElement("button");
   editButton.textContent = "Edit";
   editButton.onclick = (event) => {
     event.preventDefault();
+    const postId = new URLSearchParams(window.location.search).get("postId");
     window.location.href = `/post/edit/?postId=${postId}`;
   };
 
+  // Append all created elements to the container
+  postContainer.appendChild(titleElement);
+  postContainer.appendChild(bodyElement);
+  postContainer.appendChild(tagsElement);
+  if (mediaElement) {
+    postContainer.appendChild(mediaElement);
+  }
   postContainer.appendChild(editButton);
 }

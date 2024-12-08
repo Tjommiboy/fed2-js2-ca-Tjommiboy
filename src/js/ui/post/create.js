@@ -2,6 +2,7 @@ import { createPost } from "../../api/post/create";
 
 export async function onCreatePost(event) {
   event.preventDefault();
+
   const formData = {
     title: document.getElementById("title").value,
     body: document.getElementById("body").value,
@@ -14,12 +15,12 @@ export async function onCreatePost(event) {
       alt: document.getElementById("media-alt").value,
     },
   };
-  createPost(formData)
-    .then((response) => {
-      console.log("createPost successful", response);
-      window.location.href = "/";
-    })
-    .catch((error) => {
-      console.error("create failed", error);
-    });
+
+  try {
+    const response = await createPost(formData);
+    console.log("createPost successful", response);
+    window.location.href = "/";
+  } catch (error) {
+    console.error("create failed", error);
+  }
 }
